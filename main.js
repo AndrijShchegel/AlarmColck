@@ -25,24 +25,36 @@ const selectOption = (select, max) => {
 	}
 }
 
-const alarmCreate = (whatElement, whatId, whatFrom, sms) => {
-  let smtg = document.createElement(whatElement);
-  smtg.setAttribute("id", whatId + index);
-  if(whatElement == "button"){
-    smtg.setAttribute("onClick", sms);
+const createDiv = (...whatId) => {
+  for (let i = 0; i < whatId.length; i++){
+  let smtg = document.createElement("div");
+  smtg.setAttribute("id", whatId[i] + index);
+  document.getElementById("alarm-container").appendChild(smtg);
   }
-  document.getElementById(whatFrom).appendChild(smtg);
+}
+
+const createSelect = (...whatId) => {
+  for (let i = 0; i < whatId.length; i++){
+  let smtg = document.createElement("select");
+  smtg.setAttribute("id", whatId[i] + index);
+  document.getElementById("select" + index).appendChild(smtg);
+  }
+}
+
+const createButton = (...whatId) => {
+  for (let i = 0; i < whatId.length; i++){
+  let smtg = document.createElement("button");
+  smtg.setAttribute("id", whatId[i] + "Button" + index);
+  let upper = whatId[i].charAt(0).toUpperCase() + whatId[i].slice(1);
+  smtg.setAttribute("onClick", `alarm${upper}(getAttribute('id'))`);
+  document.getElementById("button" + index).appendChild(smtg);
+  }
 }
 
 const alarmAdd = () => {
-  alarmCreate("div", "select", "alarm-container");
-  alarmCreate("div", "button", "alarm-container");
-  alarmCreate("select", "alarmh", "select" + index);
-  alarmCreate("select", "alarmm", "select" + index);
-  alarmCreate("select", "alarms", "select" + index);
-  alarmCreate("button", "setButton", "button" + index, "alarmSet(getAttribute('id'))");
-  alarmCreate("button", "clearButton", "button" + index, "alarmClear(getAttribute('id'))");
-  alarmCreate("button", "deleteButton", "button" + index, "alarmDelete(getAttribute('id'))");
+  createDiv("select", "button");
+  createSelect("alarmh", "alarmm", "alarms");
+  createButton("set", "clear", "del");
   selectOption(document.getElementById("alarmh" + index), hrs);
   selectOption(document.getElementById("alarmm" + index), min);
   selectOption(document.getElementById("alarms" + index), sec);
