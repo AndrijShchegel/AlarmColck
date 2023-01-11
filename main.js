@@ -4,6 +4,7 @@ const alarmType = ["alarmh", "alarmm", "alarms"];
 const alarmValue = [24, 60, 60];
 const alarmDiv = ["select", "button"];
 const alarmButton = ["set", "clear", "del"];
+let alarmInterval = [];
 let index = 0;
 let time;
 
@@ -83,7 +84,7 @@ const alarmSet = (id) => {
   let neededId = id.replace("setButton", "");
   changeStateAlarm(neededId, true);
   let alarmTime = getAlarmTime(neededId);
-  setInterval(function(){
+  alarmInterval[neededId] = setInterval(() => {
   if (alarmTime == time) {
 		alert("Hello");
 	}
@@ -93,9 +94,11 @@ const alarmSet = (id) => {
 const alarmClear = (id) => {
   let neededId = id.replace("clearButton", "");
   changeStateAlarm(neededId, false);
+  clearInterval(alarmInterval[neededId]);
 }
 
 const alarmDelete = (id) => {
   let neededId = id.replace("deleteButton", "");
   deleteDiv(neededId);
+  clearInterval(alarmInterval[neededId]);
 }
