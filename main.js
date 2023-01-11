@@ -9,21 +9,18 @@ let index = 0;
 let time;
 let upload = "";
 
-const timeZero = (zero) => {
-  return (zero < 10) ? "0" + zero : zero;
+const addZero = (num) => {
+  return (num < 10) ? "0" + num : num;
 }
 
-const currentTime = () => {
+setInterval() => {
   let date = new Date(); 
   let hours = date.getHours();
   let minutes = date.getMinutes();
   let seconds = date.getSeconds();
-  time = timeZero(hours) + ":" + timeZero(minutes) + ":" + timeZero(seconds);
+  time = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds);
   document.getElementById("clock").innerHTML = time;
-  setTimeout(currentTime, 1000);
-}
-
-currentTime();
+},1000);
 
 const createDiv = () => {
   for (let i = 0; i < alarmDiv.length; i++){
@@ -38,7 +35,7 @@ const createSelect = () => {
   let smtg = document.createElement("select");
   smtg.setAttribute("id", alarmType[i] + index);
   for (let j=1; j <= alarmValue[i]; j++) {
-		smtg.options[j-1] = new Option(timeZero(j-1));
+		smtg.options[j-1] = new Option(addZero(j-1));
 	}
   document.getElementById("select" + index).appendChild(smtg);
   }
@@ -160,7 +157,7 @@ let arr = size[i+1].split(":");
      alarmAdd();
      setSelected(arr, alarmIndex);
      if (size[i+2] === "true"){
-      alarmSet("setButton" + mkl);
+      alarmSet("setButton" + alarmIndex);
      }
   }
 }
