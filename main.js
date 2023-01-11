@@ -7,6 +7,7 @@ const alarmButton = ["set", "clear", "del"];
 let alarmInterval = [];
 let index = 0;
 let time;
+let upload = "";
 
 const timeZero = (zero) => {
   return (zero < 10) ? "0" + zero : zero;
@@ -124,4 +125,42 @@ const downloadAlarm = () => {
   document.body.appendChild(element);
   element.click();
   document.body.removeChild(element);
+}
+
+const uploadAlarm = (event) => {
+    let input = event.target;
+    let reader = new FileReader();
+    reader.onload = function(){
+      upload = reader.result;
+      updateAlarm();
+    };
+    reader.readAsText(input.files[0]);
+  };
+
+const deleteAll = () => {
+  for (let i = 0; i < index; i++){
+    alarmDel("delButton"+i);
+  }
+}
+
+const setSelected = (arr, size) => {
+     for (let j = 0; j < alarmType.length; j++){
+     let doc = document.getElementById(alarmType[j] + size);
+     doc.selectedIndex = parseInt(arr[j]);
+     }
+    }
+
+const updateAlarm = () => {
+  deleteAll();
+  index = 0;
+  let size = upload.split("-");
+  for (let i = 0; i < size.length; i+=3){
+    let alarmIndex = size[i];
+let arr = size[i+1].split(":");
+     alarmAdd();
+     setSelected(arr, alarmIndex);
+     if (size[i+2] === "true"){
+      alarmSet("setButton" + mkl);
+     }
+  }
 }
