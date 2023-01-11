@@ -102,3 +102,26 @@ const alarmDelete = (id) => {
   deleteDiv(neededId);
   clearInterval(alarmInterval[neededId]);
 }
+
+const checked = (id) => {
+  return document.getElementById(alarmType[0] + id).disabled;
+}
+
+const getText = () => {
+  let text = "";
+  for (let i = 0; i < index; i++){
+    text += i + "-" + getAlarmTime(i) + "-" + checked(i) + "-";
+  }
+  return text.substring(0, text.length - 1);
+}
+
+const downloadAlarm = () => {
+  let text = getText();
+  let element = document.createElement("a");
+  element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(text));
+  element.setAttribute("download", "Alarm_Settings.txt");
+  element.style.display = "none";
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+}
