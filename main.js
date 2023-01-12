@@ -9,6 +9,19 @@ const alarmSettings = {
   index: 0
 };
 
+const addZero = (num) => {
+  return (num < 10) ? "0" + num : num;
+}
+
+setInterval(() => {
+  let date = new Date();
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let seconds = date.getSeconds();
+  let time = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds);
+  document.getElementById("clock").innerHTML = time;
+},1000);
+
 const createDiv = () => {
   for (let i = 0; i < alarmSettings.div.length; i++){
   let smtg = document.createElement("div");
