@@ -6,8 +6,6 @@ const alarmDiv = ["select", "button"];
 const alarmButton = ["set", "clear", "del"];
 let alarmInterval = [];
 let index = 0;
-let time;
-let upload = "";
 
 const addZero = (num) => {
   return (num < 10) ? "0" + num : num;
@@ -18,7 +16,7 @@ setInterval() => {
   let hours = date.getHours();
   let minutes = date.getMinutes();
   let seconds = date.getSeconds();
-  time = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds);
+  let time = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds);
   document.getElementById("clock").innerHTML = time;
 },1000);
 
@@ -83,7 +81,7 @@ const alarmSet = (id) => {
   changeStateAlarm(neededId, true);
   let alarmTime = getAlarmTime(neededId);
   alarmInterval[neededId] = setInterval(() => {
-  if (alarmTime == time) {
+  if (alarmTime == document.getElementById("clock").innerHTML) {
 		alert("Hello");
 	}
 },1000);
@@ -128,8 +126,9 @@ const uploadAlarm = (event) => {
     let input = event.target;
     let reader = new FileReader();
     reader.onload = function(){
-      upload = reader.result;
-      updateAlarm();
+      let upload = reader.result;
+      if(upload)
+      updateAlarm(upload);
     };
     reader.readAsText(input.files[0]);
   };
@@ -147,10 +146,10 @@ const setSelected = (arr, size) => {
      }
     }
 
-const updateAlarm = () => {
+const updateAlarm = (array) => {
   deleteAll();
   index = 0;
-  let size = upload.split("-");
+  let size = array.split("-");
   for (let i = 0; i < size.length; i+=3){
     let alarmIndex = size[i];
 let arr = size[i+1].split(":");
