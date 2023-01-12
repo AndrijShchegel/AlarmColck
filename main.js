@@ -50,6 +50,12 @@ const createButton = () => {
   }
 }
 
+const alarmAdd = () => {
+  createDiv();
+  createSelect();
+  createButton();
+  alarmSettings.index++;
+}
 const changeStateAlarm = (id, bool) => {
   for (let i = 0; i < alarmSettings.timeUnits.length; i++){
   document.getElementById(alarmSettings.timeUnits[i] + id).disabled = bool;
@@ -68,16 +74,10 @@ const getAlarmTime = (id) => {
 const deleteDiv = (id) => {
   for (let i = 0; i < alarmSettings.div.length; i++){
     let doc = document.getElementById(alarmSettings.div[i] + id);
-    if(doc)
-    doc.remove();
+    if(doc){
+      doc.remove();
+    }
   }
-}
-
-const alarmAdd = () => {
-  createDiv();
-  createSelect();
-  createButton();
-  alarmSettings.index++;
 }
 
 const alarmSet = (id) => {
