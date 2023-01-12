@@ -104,13 +104,20 @@ const alarmDel = (id) => {
 }
 
 const checked = (id) => {
-  return document.getElementById(alarmSettings.timeUnits[0] + id).disabled;
+  let doc = document.getElementById(alarmSettings.timeUnits[0] + id);
+  if(doc) {
+    return doc.disabled;
+  } else {
+    return "deleted";
+  }
 }
 
 const getText = () => {
   let text = "";
   for (let i = 0; i < alarmSettings.index; i++){
-    text += i + "-" + getAlarmTime(i) + "-" + checked(i) + "-";
+    if(checked(i) !== "deleted"){
+      text += i + "-" + getAlarmTime(i) + "-" + checked(i) + "-";
+    }
   }
   return text.substring(0, text.length - 1);
 }
@@ -131,8 +138,9 @@ const uploadAlarm = (event) => {
   let reader = new FileReader();
   reader.onload = function(){
     let upload = reader.result;
-    if(upload)
-    updateAlarm(upload);
+    if(upload){
+      updateAlarm(upload);
+    }
   };
   reader.readAsText(input.files[0]);
 };
@@ -157,9 +165,11 @@ const updateAlarm = (array) => {
   for (let i = 0; i < size.length; i+=3){
     let arr = size[i+1].split(":");
     alarmAdd();
-    setSelected(arr, size[i]);
-    if (size[i+2] === "true"){
-      alarmSet("setButton" + size[i]);
+    let arr = size[i + 1].split(":");
+    let newindex = alarmSettings.index - 1;
+    setSelected(arr, newindex);
+    if (size[i + 2] === "true"){
+      alarmSet("setButton" + newindex);
     }
   }
 }
