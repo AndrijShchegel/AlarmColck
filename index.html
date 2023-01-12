@@ -17,6 +17,16 @@
     <button  id='addAlarm' onClick="alarmAdd()">Add Alarm</button>
   </div>
 </div>
+<div id='downloadFile'>
+  <div>
+    <button  id='downloadButton' onClick="downloadAlarm()">Download Alarm</button>
+  </div>
+</div>
+<div id='uploadFile'>
+  <div>
+    <input type='file' accept='text/plain' onchange="uploadAlarm(event)">
+  </div>
+</div>
 <script src="main.js" charset="utf-8"></script>
 </body>
 </html>
