@@ -1,5 +1,7 @@
 'use strict';
 
+import { alarmSettings } from "./config.js";
+
 const deleteDiv = (id) => {
     for (let i = 0; i < alarmSettings.div.length; i++){
       let doc = document.getElementById(alarmSettings.div[i] + id);
@@ -47,3 +49,6 @@ const deleteDiv = (id) => {
     deleteDiv(neededId);
     clearInterval(alarmSettings.interval[neededId]);
   }
+
+  export { getAlarmTime, alarmSet, alarmClear, alarmDel }
+  

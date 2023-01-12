@@ -1,5 +1,7 @@
 'use strict';
 
+import { alarmSettings } from "./config.js";
+
 const addZero = (num) => {
     return (num < 10) ? "0" + num : num;
   }
@@ -41,10 +43,9 @@ const addZero = (num) => {
     }
   }
   
-  const alarmAdd = () => {
+  export const alarmAdd = () => {
     createDiv();
     createSelect();
     createButton();
     alarmSettings.index++;
   }
-  

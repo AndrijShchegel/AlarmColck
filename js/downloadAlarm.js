@@ -1,5 +1,8 @@
 'use strict';
 
+import { alarmSettings } from "./config.js";
+import { getAlarmTime } from "./alarmButtons.js";
+
 const checked = (id) => {
     let doc = document.getElementById(alarmSettings.timeUnits[0] + id);
     if(doc) {
@@ -19,7 +22,7 @@ const checked = (id) => {
     return text.substring(0, text.length - 1);
   }
   
-  const downloadAlarm = () => {
+  export const downloadAlarm = () => {
     let text = getText();
     let element = document.createElement("a");
     element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(text));
@@ -29,4 +32,3 @@ const checked = (id) => {
     element.click();
     document.body.removeChild(element);
   }
-  

@@ -1,5 +1,9 @@
 'use strict';
 
+import { alarmSettings } from "./config.js";
+import { alarmAdd } from "./alarmStart.js";
+import { alarmDel, alarmSet } from "./alarmButtons.js";
+
 const deleteAll = () => {
   for (let i = 0; i < alarmSettings.index; i++){
     alarmDel("delButton" + i);
@@ -28,7 +32,7 @@ const updateAlarm = (array) => {
   }
 }
 
-const uploadAlarm = (event) => {
+export const uploadAlarm = (event) => {
   let input = event.target;
   let reader = new FileReader();
   reader.onload = function(){
