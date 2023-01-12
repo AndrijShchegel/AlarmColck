@@ -91,12 +91,12 @@ const alarmDel = (id) => {
 }
 
 const checked = (id) => {
-  return document.getElementById(alarmType[0] + id).disabled;
+  return document.getElementById(alarmSettings.timeUnits[0] + id).disabled;
 }
 
 const getText = () => {
   let text = "";
-  for (let i = 0; i < index; i++){
+  for (let i = 0; i < alarmSettings.index; i++){
     text += i + "-" + getAlarmTime(i) + "-" + checked(i) + "-";
   }
   return text.substring(0, text.length - 1);
@@ -114,40 +114,39 @@ const downloadAlarm = () => {
 }
 
 const uploadAlarm = (event) => {
-    let input = event.target;
-    let reader = new FileReader();
-    reader.onload = function(){
-      let upload = reader.result;
-      if(upload)
-      updateAlarm(upload);
-    };
-    reader.readAsText(input.files[0]);
+  let input = event.target;
+  let reader = new FileReader();
+  reader.onload = function(){
+    let upload = reader.result;
+    if(upload)
+    updateAlarm(upload);
   };
+  reader.readAsText(input.files[0]);
+};
 
 const deleteAll = () => {
-  for (let i = 0; i < index; i++){
+  for (let i = 0; i < alarmSettings.index; i++){
     alarmDel("delButton"+i);
   }
 }
 
 const setSelected = (arr, size) => {
-     for (let j = 0; j < alarmType.length; j++){
-     let doc = document.getElementById(alarmType[j] + size);
-     doc.selectedIndex = parseInt(arr[j]);
-     }
-    }
+  for (let j = 0; j < alarmSettings.timeUnits.length; j++){
+  let doc = document.getElementById(alarmSettings.timeUnits[j] + size);
+  doc.selectedIndex = parseInt(arr[j]);
+  }
+}
 
 const updateAlarm = (array) => {
   deleteAll();
-  index = 0;
+  alarmSettings.index = 0;
   let size = array.split("-");
   for (let i = 0; i < size.length; i+=3){
-    let alarmIndex = size[i];
-let arr = size[i+1].split(":");
-     alarmAdd();
-     setSelected(arr, alarmIndex);
-     if (size[i+2] === "true"){
-      alarmSet("setButton" + alarmIndex);
-     }
+    let arr = size[i+1].split(":");
+    alarmAdd();
+    setSelected(arr, size[i]);
+    if (size[i+2] === "true"){
+      alarmSet("setButton" + size[i]);
+    }
   }
 }
