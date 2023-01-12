@@ -1,71 +1,62 @@
 'use strict';
 
-const alarmType = ["alarmh", "alarmm", "alarms"];
-const alarmValue = [24, 60, 60];
-const alarmDiv = ["select", "button"];
-const alarmButton = ["set", "clear", "del"];
-let alarmInterval = [];
-let index = 0;
-
-const addZero = (num) => {
-  return (num < 10) ? "0" + num : num;
-}
-
-setInterval() => {
-  let date = new Date(); 
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-  let seconds = date.getSeconds();
-  let time = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds);
-  document.getElementById("clock").innerHTML = time;
-},1000);
+const alarmSettings = {
+  timeUnits: ["hours", "minutes", "seconds"],
+  timeNumber: [24, 60, 60],
+  div: ["select", "button"],
+  button: ["set", "clear", "del"],
+  interval: [],
+  index: 0
+};
 
 const createDiv = () => {
-  for (let i = 0; i < alarmDiv.length; i++){
+  for (let i = 0; i < alarmSettings.div.length; i++){
   let smtg = document.createElement("div");
-  smtg.setAttribute("id", alarmDiv[i] + index);
-  }
+  smtg.setAttribute("id", alarmSettings.div[i] + alarmSettings.index);
   document.getElementById("alarm-container").appendChild(smtg);
+  }
 }
 
 const createSelect = () => {
-  for (let i = 0; i < alarmType.length; i++){
+  for (let i = 0; i < alarmSettings.timeUnits.length; i++){
   let smtg = document.createElement("select");
-  smtg.setAttribute("id", alarmType[i] + index);
-  for (let j=1; j <= alarmValue[i]; j++) {
-		smtg.options[j-1] = new Option(addZero(j-1));
+  smtg.setAttribute("id", alarmSettings.timeUnits[i] + alarmSettings.index);
+  for (let j=0; j < alarmSettings.timeNumber[i]; j++) {
+		smtg.options[j] = new Option(addZero(j));
 	}
-  document.getElementById("select" + index).appendChild(smtg);
+  document.getElementById("select" + alarmSettings.index).appendChild(smtg);
   }
 }
 const createButton = () => {
-  for (let i = 0; i < alarmButton.length; i++){
+  for (let i = 0; i < alarmSettings.button.length; i++){
   let smtg = document.createElement("button");
-  smtg.setAttribute("id", alarmButton[i] + "Button" + index);
-  let upper = alarmButton[i].charAt(0).toUpperCase() + alarmButton[i].slice(1);
+  smtg.setAttribute("id", alarmSettings.button[i] + "Button" + alarmSettings.index);
+  let upper = alarmSettings.button[i].charAt(0).toUpperCase() + alarmSettings.button[i].slice(1);
   smtg.setAttribute("onClick", `alarm${upper}(getAttribute('id'))`);
+  document.getElementById("button" + alarmSettings.index).appendChild(smtg);
   }
-  document.getElementById("button" + index).appendChild(smtg);
 }
 
 const changeStateAlarm = (id, bool) => {
-  for (let i = 0; i < alarmType.length; i++){
-  document.getElementById(alarmType[i] + id).disabled = bool;
+  for (let i = 0; i < alarmSettings.timeUnits.length; i++){
+  document.getElementById(alarmSettings.timeUnits[i] + id).disabled = bool;
 }
 }
 
 const getAlarmTime = (id) => {
   let selected = "";
-  for (let i = 0; i < alarmType.length; i++){
-  let doc = document.getElementById(alarmType[i] + id);
+  for (let i = 0; i < alarmSettings.timeUnits.length; i++){
+  let doc = document.getElementById(alarmSettings.timeUnits[i] + id);
   selected += doc.options[doc.selectedIndex].value + ":";
   }
   return selected.substring(0, selected.length - 1);
 }
 
 const deleteDiv = (id) => {
-  for (let i = 0; i < alarmDiv.length; i++){
-    document.getElementById(alarmDiv[i] + id).remove();
+  for (let i = 0; i < alarmSettings.div.length; i++){
+    let doc = document.getElementById(alarmSettings.div[i] + id);
+    if(doc)
+    doc.remove();
   }
 }
 
@@ -73,30 +64,30 @@ const alarmAdd = () => {
   createDiv();
   createSelect();
   createButton();
-  index++;
+  alarmSettings.index++;
 }
 
 const alarmSet = (id) => {
   let neededId = id.replace("setButton", "");
   changeStateAlarm(neededId, true);
   let alarmTime = getAlarmTime(neededId);
-  alarmInterval[neededId] = setInterval(() => {
-  if (alarmTime == document.getElementById("clock").innerHTML) {
+  alarmSettings.interval[neededId] = setInterval(() => {
+    if (alarmTime === document.getElementById("clock").innerHTML) {
 		alert("Hello");
-	}
-},1000);
+	  }
+  }, 1000);
 }
 
 const alarmClear = (id) => {
   let neededId = id.replace("clearButton", "");
   changeStateAlarm(neededId, false);
-  clearInterval(alarmInterval[neededId]);
+  clearInterval(alarmSettings.interval[neededId]);
 }
 
-const alarmDelete = (id) => {
-  let neededId = id.replace("deleteButton", "");
+const alarmDel = (id) => {
+  let neededId = id.replace("delButton", "");
   deleteDiv(neededId);
-  clearInterval(alarmInterval[neededId]);
+  clearInterval(alarmSettings.interval[neededId]);
 }
 
 const checked = (id) => {
