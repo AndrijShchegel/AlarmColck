@@ -2,6 +2,13 @@ import { alarmSettings } from './config.js';
 import { alarmAdd } from './alarmStart.js';
 import { alarmDel, alarmSet } from './alarmButtons.js';
 
+const updateId = {
+  time: 0,
+  isSet: 1,
+  name: 2,
+  length: 3
+};
+
 const deleteAll = () => {
   for (let i = 0; i < alarmSettings.index; i++) {
     alarmDel('delButton' + i);
@@ -19,15 +26,15 @@ const updateAlarm = array => {
   deleteAll();
   alarmSettings.index = 0;
   const size = array.split('-');
-  for (let i = 0; i < size.length; i += 4) {
+  for (let i = 0; i < size.length; i += updateId.length) {
     alarmAdd();
-    const arr = size[i + 1].split(':');
+    const arr = size[i + updateId.time].split(':');
     const newindex = alarmSettings.index - 1;
     setSelected(arr, newindex);
-    if (size[i + 2] === 'true') {
+    if (size[i + updateId.isSet] === 'true') {
       alarmSet('setButton' + newindex);
     }
-    document.getElementById('name' + newindex).innerHTML = size[i + 3];
+    document.getElementById('name' + newindex).innerHTML = size[i + updateId.name];
   }
 };
 

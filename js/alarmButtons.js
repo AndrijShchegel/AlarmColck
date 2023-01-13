@@ -53,7 +53,7 @@ const alarmDel = id => {
 
 const alarmChangeName = id => {
   const neededId = id.replace('changeNameButton', '');
-  const name = prompt('Type here');
+  const name = prompt('Type alarm name here');
   if (name) {
     document.getElementById('name' + neededId).innerHTML = name;
   }
