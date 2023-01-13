@@ -51,5 +51,5 @@ const alarmDel = id => {
   clearInterval(alarmSettings.interval[neededId]);
 };
 
-  export { getAlarmTime, alarmSet, alarmClear, alarmDel }
+export { getAlarmTime, alarmSet, alarmClear, alarmDel }
   
