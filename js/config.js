@@ -1,5 +1,3 @@
-'use strict';
-
 export const alarmSettings = {
   timeUnits: ['hours', 'minutes', 'seconds'],
   timeNumber: [24, 60, 60],

@@ -1,7 +1,5 @@
-'use strict';
-
-import { alarmSettings } from "./config.js";
-import { getAlarmTime } from "./alarmButtons.js";
+import { alarmSettings } from './config.js';
+import { getAlarmTime } from './alarmButtons.js';
 
 const checked = id => {
   const doc = document.getElementById(alarmSettings.timeUnits[0] + id);

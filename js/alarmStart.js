@@ -1,6 +1,4 @@
-'use strict';
-
-import { alarmSettings } from "./config.js";
+import { alarmSettings } from './config.js';
 
 const addZero = num => ((num < 10) ? '0' + num : num);
 
@@ -37,6 +35,7 @@ const createButton = () => {
     doc.setAttribute('id', alarmSettings.button[i] + 'Button' + alarmSettings.index);
     const upper = alarmSettings.button[i].charAt(0).toUpperCase() + alarmSettings.button[i].slice(1);
     doc.setAttribute('onClick', `alarm${upper}(getAttribute('id'))`);
+    doc.innerHTML = upper;
     document.getElementById('button' + alarmSettings.index).appendChild(doc);
   }
 };

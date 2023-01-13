@@ -1,6 +1,4 @@
-'use strict';
-
-import { alarmSettings } from "./config.js";
+import { alarmSettings } from './config.js';
 
 const deleteDiv = id => {
   for (let i = 0; i < alarmSettings.div.length; i++) {
@@ -21,7 +19,7 @@ const getAlarmTime = id => {
   let selected = '';
   for (let i = 0; i < alarmSettings.timeUnits.length; i++) {
     const doc = document.getElementById(alarmSettings.timeUnits[i] + id);
-    if (doc){
+    if (doc) {
       selected += doc.options[doc.selectedIndex].value + ':';
     }
   }
@@ -34,7 +32,7 @@ const alarmSet = id => {
   const alarmTime = getAlarmTime(neededId);
   alarmSettings.interval[neededId] = setInterval(() => {
     if (alarmTime === document.getElementById('clock').innerHTML) {
-      alert('Hello');
+      alert(`Alarm ${id} went off`);
     }
   }, 1000);
 };
@@ -51,5 +49,4 @@ const alarmDel = id => {
   clearInterval(alarmSettings.interval[neededId]);
 };
 
-export { getAlarmTime, alarmSet, alarmClear, alarmDel }
-  
+export { getAlarmTime, alarmSet, alarmClear, alarmDel };

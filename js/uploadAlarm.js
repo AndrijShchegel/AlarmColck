@@ -1,8 +1,6 @@
-'use strict';
-
-import { alarmSettings } from "./config.js";
-import { alarmAdd } from "./alarmStart.js";
-import { alarmDel, alarmSet } from "./alarmButtons.js";
+import { alarmSettings } from './config.js';
+import { alarmAdd } from './alarmStart.js';
+import { alarmDel, alarmSet } from './alarmButtons.js';
 
 const deleteAll = () => {
   for (let i = 0; i < alarmSettings.index; i++) {
