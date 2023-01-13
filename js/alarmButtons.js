@@ -49,4 +49,12 @@ const alarmDel = id => {
   clearInterval(alarmSettings.interval[neededId]);
 };
 
-export { getAlarmTime, alarmSet, alarmClear, alarmDel };
+const alarmChangeName = id => {
+  const neededId = id.replace('changeNameButton', '');
+  const name = prompt('Type here');
+  if (name) {
+    document.getElementById('name' + neededId).innerHTML = name;
+  }
+};
+
+export { getAlarmTime, alarmSet, alarmClear, alarmDel, alarmChangeName };

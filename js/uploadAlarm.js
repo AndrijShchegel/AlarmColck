@@ -19,7 +19,7 @@ const updateAlarm = array => {
   deleteAll();
   alarmSettings.index = 0;
   const size = array.split('-');
-  for (let i = 0; i < size.length; i += 3) {
+  for (let i = 0; i < size.length; i += 4) {
     alarmAdd();
     const arr = size[i + 1].split(':');
     const newindex = alarmSettings.index - 1;
@@ -27,6 +27,7 @@ const updateAlarm = array => {
     if (size[i + 2] === 'true') {
       alarmSet('setButton' + newindex);
     }
+    document.getElementById('name' + newindex).innerHTML = size[i + 3];
   }
 };
 

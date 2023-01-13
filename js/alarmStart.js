@@ -19,6 +19,10 @@ const createDiv = () => {
   }
 };
 
+const setName = () => {
+  document.getElementById('name' + alarmSettings.index).innerHTML = 'Alarm';
+};
+
 const createSelect = () => {
   for (let i = 0; i < alarmSettings.timeUnits.length; i++) {
     const doc = document.createElement('select');
@@ -42,6 +46,7 @@ const createButton = () => {
 
 export const alarmAdd = () => {
   createDiv();
+  setName();
   createSelect();
   createButton();
   alarmSettings.index++;

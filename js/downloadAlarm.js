@@ -10,11 +10,13 @@ const checked = id => {
   }
 };
 
+const getName = id => document.getElementById('name' + id).innerHTML;
+
 const getText = () => {
   let text = '';
   for (let i = 0; i < alarmSettings.index; i++) {
     if (checked(i) !== 'deleted') {
-      text += i + '-' + getAlarmTime(i) + '-' + checked(i) + '-';
+      text += i + '-' + getAlarmTime(i) + '-' + checked(i) + '-' + getName(i) + '-';
     }
   }
   return text.substring(0, text.length - 1);
