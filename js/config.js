@@ -3,6 +3,5 @@ export const alarmSettings = {
   timeNumber: [24, 60, 60],
   div: ['name', 'select', 'button'],
   button: ['set', 'clear', 'del', 'changeName'],
-  interval: [],
   index: 0
 };

@@ -1,5 +1,7 @@
 import { alarmSettings } from './config.js';
 
+const interval = [];
+
 const deleteDiv = id => {
   for (let i = 0; i < alarmSettings.div.length; i++) {
     const doc = document.getElementById(alarmSettings.div[i] + id);
@@ -30,7 +32,7 @@ const alarmSet = id => {
   const neededId = id.replace('setButton', '');
   changeStateAlarm(neededId, true);
   const alarmTime = getAlarmTime(neededId);
-  alarmSettings.interval[neededId] = setInterval(() => {
+  interval[neededId] = setInterval(() => {
     if (alarmTime === document.getElementById('clock').innerHTML) {
       alert(`Alarm ${id} went off`);
     }
@@ -40,13 +42,13 @@ const alarmSet = id => {
 const alarmClear = id => {
   const neededId = id.replace('clearButton', '');
   changeStateAlarm(neededId, false);
-  clearInterval(alarmSettings.interval[neededId]);
+  clearInterval(interval[neededId]);
 };
 
 const alarmDel = id => {
   const neededId = id.replace('delButton', '');
   deleteDiv(neededId);
-  clearInterval(alarmSettings.interval[neededId]);
+  clearInterval(interval[neededId]);
 };
 
 const alarmChangeName = id => {
