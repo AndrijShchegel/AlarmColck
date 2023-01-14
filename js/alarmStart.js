@@ -33,6 +33,7 @@ const createSelect = () => {
     document.getElementById('select' + alarmSettings.index).appendChild(doc);
   }
 };
+
 const createButton = () => {
   for (let i = 0; i < alarmSettings.button.length; i++) {
     const doc = document.createElement('button');
