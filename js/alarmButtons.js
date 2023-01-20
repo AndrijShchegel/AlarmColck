@@ -1,5 +1,5 @@
 import { alarmSettings } from './config.js';
-import { setCookie } from './cookie.js';
+import { changeCookie } from './cookie.js';
 
 const interval = [];
 
@@ -33,7 +33,7 @@ const getAlarmTime = id => {
 const alarmSet = id => {
   const neededId = id.replace(/[a-zA-Z]+/, '');
   changeStateAlarm(neededId, true);
-  setCookie(neededId, 2, true);
+  changeCookie(neededId, 2, true);
   const alarmTime = getAlarmTime(neededId);
   const alertName = document.getElementById('name' + neededId).innerHTML;
   interval[neededId] = setInterval(() => {
@@ -46,7 +46,7 @@ const alarmSet = id => {
 const alarmClear = id => {
   const neededId = id.replace('clearButton', '');
   changeStateAlarm(neededId, false);
-  setCookie(neededId, 2, false);
+  changeCookie(neededId, 2, false);
   clearInterval(interval[neededId]);
 };
 
@@ -61,7 +61,7 @@ const alarmChangeName = id => {
   const name = prompt('Type here');
   if (name) {
     document.getElementById('name' + neededId).innerHTML = name;
-    setCookie(neededId, 0, name);
+    changeCookie(neededId, 0, name);
   }
 };
 
