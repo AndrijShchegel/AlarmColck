@@ -5,15 +5,17 @@
   <title>Clock</title>
   <link rel="stylesheet" href="style.css"></link>
 </head>
-<body>
+<body onload="checkCookie()">
 <h3>Clock</h3>
 <div id = "clock"></div>
-<div id="alarm-container">
+<div id='alarm-container'>
   <h3>Set Alarm Time</h3>
 </div>
 
-<div id="buttonHolder">
-    <button  id="addAlarm">Add Alarm</button>
+<div id='buttonHolder'>
+  <div>
+    <button  id='addAlarm'>Add Alarm</button>
+  </div>
 </div>
 <script src="js/script.js" charset="utf-8" type="module"></script>
 </body>
