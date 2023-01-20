@@ -7,6 +7,32 @@ const cookie = {
   defValue: ['Alarm', '00:00:00', 'false']
 };
 
+const addCookie = () => {
+    const d = new Date();
+    d.setTime(d.getTime() + (7 * 24 * 60 * 60 * 1000));
+    const expires = 'expires=' + d.toUTCString();
+    if (!document.cookie) {
+      for (let i = 0; i < cookie.name.length; i++) {
+        document.cookie = cookie.name[i] + '=' + cookie.defValue[i] + ';' + expires + ';path=/';
+      }
+      return '';
+    }
+    for (let sii = 0; sii < cookie.name.length; sii++) {
+      const ca = document.cookie.split('; ');
+      for (let i = 0; i < ca.length; i++) {
+        if (ca[i].indexOf(cookie.name[sii]) === 0) {
+          const c = ca[i].substring(cookie.name[sii].length + 1, ca[i].length);
+          const arr = c.split('-');
+          arr[alarmSettings.index - 1] = cookie.defValue[sii];
+          let str = '';
+          for (let j = 0; j < arr.length; j++) { str += '-' + arr[j]; }
+          document.cookie = cookie.name[sii] + '=' + str.slice(1) + ';' + expires + ';path=/';
+          break;
+        }
+      }
+    }
+  };
+
 const setCookie = (id, nameId, value) => {
   const neededId = id.replace(/[a-zA-Z]+/, '');
   const ca = document.cookie.split('; ');
@@ -66,4 +92,4 @@ const checkCookie = () => {
   alarmCookie();
 };
 
-export {setCookie, checkCookie}
+export {addCookie, setCookie, checkCookie}
