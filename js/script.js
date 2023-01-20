@@ -1,13 +1,13 @@
-import { alarmSet, alarmClear, alarmDel, alarmChangeName } from './alarmButtons.js';
+import { alarmSet, alarmClear, alarmDel, alarmChangeName, getAlarmTime } from './alarmButtons.js';
+import { addCookie, checkCookie, setCookie } from './cookie.js';
 import { alarmAdd } from './alarmStart.js';
-import { addCookie, setCookie, checkCookie } from './cookie.js';
 
-document.getElementById('addAlarm').addEventListener('click', alarmAdd);
 document.getElementById('addAlarm').addEventListener('click', addCookie);
-window.getAlarmTime = getAlarmTime;
+document.getElementById('addAlarm').addEventListener('click', alarmAdd);
 window.alarmChangeName = alarmChangeName;
-window.alarmSet = alarmSet;
-window.setCookie = setCookie;
+window.getAlarmTime = getAlarmTime;
 window.checkCookie = checkCookie;
 window.alarmClear = alarmClear;
+window.setCookie = setCookie;
+window.alarmSet = alarmSet;
 window.alarmDel = alarmDel;

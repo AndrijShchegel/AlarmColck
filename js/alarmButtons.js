@@ -19,9 +19,10 @@ const changeStateAlarm = (id, bool) => {
 };
 
 const getAlarmTime = id => {
+  const neededId = id.split(/[a-zA-Z]+/)[1];
   let selected = '';
   for (let i = 0; i < alarmSettings.timeUnits.length; i++) {
-    const doc = document.getElementById(alarmSettings.timeUnits[i] + id);
+    const doc = document.getElementById(alarmSettings.timeUnits[i] + neededId);
     if (doc) {
       selected += doc.options[doc.selectedIndex].value + ':';
     }
@@ -30,8 +31,9 @@ const getAlarmTime = id => {
 };
 
 const alarmSet = id => {
-  const neededId = id.replace('setButton', '');
+  const neededId = id.replace(/[a-zA-Z]+/, '');
   changeStateAlarm(neededId, true);
+  setCookie(neededId, 2, true);
   const alarmTime = getAlarmTime(neededId);
   const alertName = document.getElementById('name' + neededId).innerHTML;
   interval[neededId] = setInterval(() => {
@@ -56,10 +58,10 @@ const alarmDel = id => {
 
 const alarmChangeName = id => {
   const neededId = id.replace('changeNameButton', '');
-  const name = prompt('Type alarm name here');
+  const name = prompt('Type here');
   if (name) {
     document.getElementById('name' + neededId).innerHTML = name;
-    setCookie(neededId, 2, false);
+    setCookie(neededId, 0, name);
   }
 };
 
