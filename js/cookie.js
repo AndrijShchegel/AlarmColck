@@ -11,7 +11,7 @@ const expireDate = () => {
   const date = new Date();
   date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
   return 'expires=' + date.toUTCString();
-}
+};
 
 const setCookie = (id, nameId, value, expires) => {
   const cookies = document.cookie.split('; ');
@@ -26,7 +26,7 @@ const setCookie = (id, nameId, value, expires) => {
       break;
     }
   }
-}
+};
 
 const addCookie = () => {
   const expires = expireDate();
@@ -35,16 +35,16 @@ const addCookie = () => {
       document.cookie = cookie.name[i] + '=' + cookie.defValue[i] + ';' + expires + ';path=/';
     }
   } else {
-  for (let j = 0; j < cookie.name.length; j++) {
-    setCookie(alarmSettings.index - 1, j, cookie.defValue[j], expires)
+    for (let j = 0; j < cookie.name.length; j++) {
+      setCookie(alarmSettings.index - 1, j, cookie.defValue[j], expires);
+    }
   }
-}
 };
 
 const changeCookie = (id, nameId, value) => {
   const neededId = id.replace(/[a-zA-Z]+/, '');
   const expires = expireDate();
-  setCookie(neededId, nameId, value, expires)
+  setCookie(neededId, nameId, value, expires);
 };
 
 const setSelected = (arr, id) => {
