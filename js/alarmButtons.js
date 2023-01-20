@@ -33,7 +33,7 @@ const alarmSet = id => {
   const neededId = id.replace('setButton', '');
   changeStateAlarm(neededId, true);
   const alarmTime = getAlarmTime(neededId);
-  const alertName = document.getElementById('name' + neededId).innerHTML
+  const alertName = document.getElementById('name' + neededId).innerHTML;
   interval[neededId] = setInterval(() => {
     if (alarmTime === document.getElementById('clock').innerHTML) {
       alert(`${alertName} went off`);
