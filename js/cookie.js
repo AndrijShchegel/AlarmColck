@@ -83,7 +83,6 @@ const alarmCookie = () => {
         }
       }
     }
-    break;
   }
 };
 
