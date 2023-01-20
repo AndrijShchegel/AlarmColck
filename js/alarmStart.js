@@ -28,7 +28,7 @@ const createSelect = () => {
   for (let i = 0; i < alarmSettings.timeUnits.length; i++) {
     const doc = document.createElement('select');
     doc.setAttribute('id', alarmSettings.timeUnits[i] + alarmSettings.index);
-    doc.setAttribute('onChange', 'changeCookie(getAttribute(\'id\'), 1, getAlarmTime(getAttribute(\'id\')))');
+    doc.setAttribute('onChange', 'changeCookie(getAttribute(\'id\'), \'time\', getAlarmTime(getAttribute(\'id\')))');
     for (let j = 0; j < alarmSettings.timeNumber[i]; j++) {
       doc.options[j] = new Option(addZero(j));
     }

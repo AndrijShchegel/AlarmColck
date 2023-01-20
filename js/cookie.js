@@ -13,16 +13,16 @@ const expireDate = () => {
   return 'expires=' + date.toUTCString();
 };
 
-const setCookie = (id, nameId, value, expires) => {
+const setCookie = (id, name, value, expires) => {
   const cookies = document.cookie.split('; ');
   for (let i = 0; i < cookies.length; i++) {
-    if (cookies[i].indexOf(cookie.name[nameId]) === 0) {
-      const coockieValue = cookies[i].substring(cookie.name[nameId].length + 1, cookies[i].length);
+    if (cookies[i].indexOf(name) === 0) {
+      const coockieValue = cookies[i].substring(name.length + 1, cookies[i].length);
       const array = coockieValue.split('-');
       array[id] = value;
       let string = '';
       for (let j = 0; j < array.length; j++) string += '-' + array[j];
-      document.cookie = cookie.name[nameId] + '=' + string.slice(1) + ';' + expires + ';path=/';
+      document.cookie = name + '=' + string.slice(1) + ';' + expires + ';path=/';
       break;
     }
   }
@@ -36,15 +36,15 @@ const addCookie = () => {
     }
     return;
   }
-  for (let j = 0; j < cookie.name.length; j++) {
-    setCookie(alarmSettings.index - 1, j, cookie.defValue[j], expires);
+  for (const name of cookie.name) {
+    setCookie(alarmSettings.index - 1, name, cookie.defValue[j], expires);
   }
 };
 
-const changeCookie = (id, nameId, value) => {
+const changeCookie = (id, name, value) => {
   const neededId = id.replace(/[a-zA-Z]+/, '');
   const expires = expireDate();
-  setCookie(neededId, nameId, value, expires);
+  setCookie(neededId, name, value, expires);
 };
 
 const setSelected = (arr, id) => {

@@ -33,7 +33,7 @@ const getAlarmTime = id => {
 const alarmSet = id => {
   const neededId = id.replace(/[a-zA-Z]+/, '');
   changeStateAlarm(neededId, true);
-  changeCookie(neededId, 2, true);
+  changeCookie(neededId, 'isSet', true);
   const alarmTime = getAlarmTime(neededId);
   const alertName = document.getElementById('name' + neededId).innerHTML;
   interval[neededId] = setInterval(() => {
@@ -46,7 +46,7 @@ const alarmSet = id => {
 const alarmClear = id => {
   const neededId = id.replace('clearButton', '');
   changeStateAlarm(neededId, false);
-  changeCookie(neededId, 2, false);
+  changeCookie(neededId, 'isSet', false);
   clearInterval(interval[neededId]);
 };
 
@@ -61,7 +61,7 @@ const alarmChangeName = id => {
   const name = prompt('Type here');
   if (name) {
     document.getElementById('name' + neededId).innerHTML = name;
-    changeCookie(neededId, 0, name);
+    changeCookie(neededId, 'name', name);
   }
 };
 
